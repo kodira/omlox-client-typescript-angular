@@ -1,5 +1,5 @@
 {
-    "name": "@omlox/angular-client",
+    "name": "@kodira/omlox-client-typescript-angular",
     "version": "0.1.0",
     "description": "TypeScript Angular client for the OMLOX Hub API 2.0",
     "main": "index.js",
@@ -12,9 +12,24 @@
     "author": "Kodira GmbH",
     "license": "MIT",
     "peerDependencies": {
-        "@angular/core": ">=16.0.0",
         "@angular/common": ">=16.0.0",
-        "rxjs": ">=7.0.0"
+        "@angular/core": ">=16.0.0"
+    },
+    "devDependencies": {
+        "@angular/build": "^20.3.13",
+        "@angular/cli": "^20.3.13",
+        "@angular/compiler-cli": "^20.3.0",
+        "@angular-devkit/build-angular": "^20.3.0",
+        "typescript": "~5.9.2"
+    },
+    "dependencies": {
+        "tslib": "^2.3.0"
+    },
+    "sideEffects": false,
+    "scripts": {
+        "build": "ng build",
+        "publish": "rm -r dist/* && npm run build && cd dist && npm publish",
+        "link": "rm -r dist/* && npm run build && cd dist && npm link"
     },
     "repository": {
         "type": "git",
