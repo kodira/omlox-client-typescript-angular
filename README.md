@@ -20,7 +20,23 @@ npm install @kodira/omlox-client-typescript-angular
 
 ## Usage
 
-### 1. Import the module
+### 1. Provide the services (recommended for modern Angular)
+
+```typescript
+import { bootstrapApplication } from '@angular/platform-browser'
+import { provideOmloxClient } from '@kodira/omlox-client-typescript-angular'
+import { AppComponent } from './app/app.component'
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    provideOmloxClient({
+      baseUrl: 'https://your-omlox-hub.com/api',
+    }),
+  ],
+})
+```
+
+### 1. Alternative: Import the module (legacy)
 
 ```typescript
 import { OmloxClientModule } from '@kodira/omlox-client-typescript-angular'
@@ -38,13 +54,14 @@ export class AppModule {}
 ### 2. Use in your services
 
 ```typescript
-import { Injectable } from '@angular/core'
+import { Injectable, inject } from '@angular/core'
 import { Observable } from 'rxjs'
 import { OmloxTrackablesService, OmloxBaseService, Trackable } from '@kodira/omlox-client-typescript-angular'
 
 @Injectable()
 export class YourService {
-  constructor(private trackablesService: OmloxTrackablesService, private baseService: OmloxBaseService) {}
+  private trackablesService = inject(OmloxTrackablesService)
+  private baseService = inject(OmloxBaseService)
 
   setupAuth(token: string): void {
     this.baseService.setBearerToken(token)

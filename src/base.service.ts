@@ -1,4 +1,4 @@
-import { Injectable, Inject, Optional } from '@angular/core'
+import { Injectable, inject } from '@angular/core'
 import { HttpClient, HttpHeaders, HttpParams, HttpErrorResponse } from '@angular/common/http'
 import { Observable, throwError } from 'rxjs'
 import { catchError } from 'rxjs/operators'
@@ -13,6 +13,11 @@ import { OmloxClientConfig, OMLOX_CLIENT_CONFIG } from './config'
   providedIn: 'root',
 })
 export class OmloxBaseService {
+  /** Angular HTTP client for making API requests */
+  protected http = inject(HttpClient)
+  /** Optional configuration for the OMLOX client */
+  private config = inject(OMLOX_CLIENT_CONFIG, { optional: true })
+  
   /** Base URL for the OMLOX API endpoint */
   protected baseUrl: string
   /** Default HTTP headers to be included with all requests */
@@ -23,14 +28,9 @@ export class OmloxBaseService {
   private instanceId: string
 
   /**
-   * Constructs the base service with HTTP client and optional configuration.
-   * @param http Angular HTTP client for making API requests
-   * @param config Optional configuration for the OMLOX client
+   * Constructs the base service using dependency injection.
    */
-  constructor(
-    protected http: HttpClient,
-    @Optional() @Inject(OMLOX_CLIENT_CONFIG) private config?: OmloxClientConfig,
-  ) {
+  constructor() {
     this.instanceId = Math.random().toString(36).substr(2, 9)
     this.baseUrl = this.config?.baseUrl || '/api'
     this.defaultHeaders = new HttpHeaders(this.config?.defaultHeaders || {})
