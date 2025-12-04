@@ -4,18 +4,18 @@ A custom TypeScript Angular client for the omlox Hub API with proper Bearer auth
 
 ## Features
 
-- ✅ Native Angular services using HttpClient
-- ✅ Proper Bearer token authentication
-- ✅ Full TypeScript support with typed models
-- ✅ Observable-based API
-- ✅ Comprehensive error handling
-- ✅ Modular architecture
-- ✅ Ready for NPM publishing
+- Native Angular services using HttpClient
+- Proper Bearer token authentication
+- Full TypeScript support with typed models
+- Observable-based API
+- Comprehensive error handling
+- Modular architecture
+- Ready for NPM publishing
 
 ## Installation
 
 ```bash
-npm install @omlox/angular-client
+npm install @kodira/omlox-client-typescript-angular
 ```
 
 ## Usage
@@ -23,7 +23,7 @@ npm install @omlox/angular-client
 ### 1. Import the module
 
 ```typescript
-import { OmloxClientModule } from '@omlox/angular-client'
+import { OmloxClientModule } from '@kodira/omlox-client-typescript-angular'
 
 @NgModule({
   imports: [
@@ -40,7 +40,7 @@ export class AppModule {}
 ```typescript
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
-import { OmloxTrackablesService, OmloxBaseService, Trackable } from '@omlox/angular-client'
+import { OmloxTrackablesService, OmloxBaseService, Trackable } from '@kodira/omlox-client-typescript-angular'
 
 @Injectable()
 export class YourService {
@@ -79,5 +79,5 @@ The token will be automatically included in all subsequent API requests.
 All omlox data models are fully typed:
 
 ```typescript
-import { Trackable, Fence, Zone, Location, TrackableMotion } from '@omlox/angular-client'
+import { Trackable, Fence, Zone, Location, TrackableMotion } from '@kodira/omlox-client-typescript-angular'
 ```
