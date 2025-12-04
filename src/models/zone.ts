@@ -1,4 +1,4 @@
-import { Polygon, Point } from './common';
+import { Polygon, Point } from './common'
 
 /**
  * Zone schema from the OMLOX Hub API specification.
@@ -6,37 +6,37 @@ import { Polygon, Point } from './common';
  */
 export interface Zone {
     /** Must be a unique identifier (i.e. a UUID). When creating a zone, a unique id will be generated if it is not provided. */
-    id: string;
+    id: string
     /** The positioning system type. */
-    type: 'uwb' | 'wifi' | 'rfid' | 'ibeacon';
+    type: 'uwb' | 'wifi' | 'rfid' | 'ibeacon'
     /** A foreign identifier related to the zone (e.g. a RFID scanner or a Wi-Fi map hierarchy). */
-    foreign_id?: string;
+    foreign_id?: string
     /** The zone's position in EPSG:4326 (GPS) coordinates. For a complete configuration the position MUST be present for proximity based zones (RFID, iBeacon) and benchmark based zones, and is OPTIONAL for all other zone types. For proximity based positioning systems like RFID or iBeacon, the position represents the coordinates where the positioning system is located (e.g. the RFID scanner). For the benchmark based zone the position represents the global benchmark point. For all others, the position MAY be used as a hint for the location of the infrastructure. */
-    position?: Point;
+    position?: Point
     /** For proximity based systems. Describes the zone as a circular region with a given radius in meters around the position. The radius MUST be ignored for non-proximity based position providers. */
-    radius?: number;
+    radius?: number
     /** An array containing a mapping between geographic coordinates (longitude, latitude) in WGS84 and relative coordinates (x,y) provided by the positioning system of the zone. For a complete configuration this property MUST be present for non-proximity based positioning systems (UWB, Wi-Fi, etc). This property MUST NOT be present for proximity based positioning systems, as these refer to the fixed position. */
-    ground_control_points?: number[][];
+    ground_control_points?: number[][]
     /** Set to true to use an incomplete zone, which has to be further configured later. By default a complete configuration is required. */
-    incomplete_configuration?: boolean;
+    incomplete_configuration?: boolean
     /** The timestamp identifying when the EPSG:4326 coordinates for the zone definition were recorded. Using this value for location data processing is OPTIONAL. This value MAY be used for advanced coordinate projection. For example, to reflect tectonic drift of WGS84 location data which is fixed at the North American plate. */
-    measurement_timestamp?: string;
+    measurement_timestamp?: string
     /** Site identifier */
-    site?: string;
+    site?: string
     /** Building identifier */
-    building?: string;
+    building?: string
     /** The canonical representation of the floor level, where floor 0 is the ground floor. If no floor is set or floor is null, 0 is used. */
-    floor?: number;
+    floor?: number
     /** Name of the zone. */
-    name?: string;
+    name?: string
     /** An optional description providing additional information for the zone. */
-    description?: string;
+    description?: string
     /** An address describing the location of the zone. */
-    address?: string;
+    address?: string
     /** Any additional application or vendor specific properties. An application implementing this object is not required to interpret any of the custom properties, but it MUST preserve the properties if set. */
-    properties?: Record<string, any>;
+    properties?: Record<string, any>
     /** The reference height of the zone in WGS84 coordinates. */
-    wgs84_height?: number;
+    wgs84_height?: number
 }
 
 /**
@@ -45,17 +45,17 @@ export interface Zone {
  */
 export interface WebSocketSubscriptionRequest {
     /** Optional unique identifier for the subscription */
-    id?: string;
+    id?: string
     /** Type of events to subscribe to */
-    type: WebSocketSubscriptionType;
+    type: WebSocketSubscriptionType
     /** Subscribe to events for a specific trackable (optional filter) */
-    trackable_id?: string;
+    trackable_id?: string
     /** Subscribe to events for a specific fence (optional filter) */
-    fence_id?: string;
+    fence_id?: string
     /** Subscribe to events for a specific zone (optional filter) */
-    zone_id?: string;
+    zone_id?: string
     /** Additional subscription parameters */
-    properties?: Record<string, any>;
+    properties?: Record<string, any>
 }
 
 /**
@@ -75,11 +75,11 @@ export enum WebSocketSubscriptionType {
  */
 export interface WebSocketSubscriptionResponse {
     /** Unique identifier for the subscription */
-    id: string;
+    id: string
     /** Status of the subscription request */
-    status: WebSocketSubscriptionStatus;
+    status: WebSocketSubscriptionStatus
     /** Optional error or informational message */
-    message?: string;
+    message?: string
 }
 
 /**
@@ -98,13 +98,13 @@ export enum WebSocketSubscriptionStatus {
  */
 export interface WebSocketMessage {
     /** Optional message identifier */
-    id?: string;
+    id?: string
     /** Type of event this message represents */
-    type: WebSocketMessageType;
+    type: WebSocketMessageType
     /** Event-specific data payload */
-    data: any;
+    data: any
     /** Unix timestamp when the event occurred */
-    timestamp: number;
+    timestamp: number
 }
 
 /**
@@ -124,9 +124,9 @@ export enum WebSocketMessageType {
  */
 export interface WebSocketError {
     /** Error code indicating the type of error */
-    code: number;
+    code: number
     /** Human-readable error message */
-    message: string;
+    message: string
     /** Additional error details or context */
-    details?: any;
+    details?: any
 }

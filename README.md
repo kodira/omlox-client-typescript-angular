@@ -28,11 +28,11 @@ import { provideOmloxClient } from '@kodira/omlox-client-typescript-angular'
 import { AppComponent } from './app/app.component'
 
 bootstrapApplication(AppComponent, {
-  providers: [
-    provideOmloxClient({
-      baseUrl: 'https://your-omlox-hub.com/api',
-    }),
-  ],
+    providers: [
+        provideOmloxClient({
+            baseUrl: 'https://your-omlox-hub.com/api',
+        }),
+    ],
 })
 ```
 
@@ -42,11 +42,11 @@ bootstrapApplication(AppComponent, {
 import { OmloxClientModule } from '@kodira/omlox-client-typescript-angular'
 
 @NgModule({
-  imports: [
-    OmloxClientModule.forRoot({
-      baseUrl: 'https://your-omlox-hub.com/api',
-    }),
-  ],
+    imports: [
+        OmloxClientModule.forRoot({
+            baseUrl: 'https://your-omlox-hub.com/api',
+        }),
+    ],
 })
 export class AppModule {}
 ```
@@ -60,16 +60,16 @@ import { OmloxTrackablesService, OmloxBaseService, Trackable } from '@kodira/oml
 
 @Injectable()
 export class YourService {
-  private trackablesService = inject(OmloxTrackablesService)
-  private baseService = inject(OmloxBaseService)
+    private trackablesService = inject(OmloxTrackablesService)
+    private baseService = inject(OmloxBaseService)
 
-  setupAuth(token: string): void {
-    this.baseService.setBearerToken(token)
-  }
+    setupAuth(token: string): void {
+        this.baseService.setBearerToken(token)
+    }
 
-  getTrackables(): Observable<Trackable[]> {
-    return this.trackablesService.getAllTrackables()
-  }
+    getTrackables(): Observable<Trackable[]> {
+        return this.trackablesService.getAllTrackables()
+    }
 }
 ```
 

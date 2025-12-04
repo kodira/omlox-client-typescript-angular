@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { OmloxBaseService } from '../base.service';
-import { Fence, FenceEvent, Collision, CollisionEvent } from '../models';
+import { Injectable } from '@angular/core'
+import { HttpParams } from '@angular/common/http'
+import { Observable } from 'rxjs'
+import { OmloxBaseService } from '../base.service'
+import { Fence, FenceEvent, Collision, CollisionEvent } from '../models'
 
 @Injectable({
     providedIn: 'root',
@@ -13,7 +13,7 @@ export class OmloxFencesService extends OmloxBaseService {
      * Returns an array of all fence objects. If authorization is enabled only the corresponding fences are returned.
      */
     getAllFences(): Observable<Fence[]> {
-        return this.get<Fence[]>('/fences/summary');
+        return this.get<Fence[]>('/fences/summary')
     }
 
     /**
@@ -21,7 +21,7 @@ export class OmloxFencesService extends OmloxBaseService {
      * Returns the fence object with the given id.
      */
     getFence(fenceId: string): Observable<Fence> {
-        return this.get<Fence>(`/fences/${fenceId}`);
+        return this.get<Fence>(`/fences/${fenceId}`)
     }
 
     /**
@@ -31,19 +31,19 @@ export class OmloxFencesService extends OmloxBaseService {
     createFence(
         fence: Fence,
         options?: {
-            forceLocationUpdate?: boolean;
-            subdivide?: boolean;
-        }
+            forceLocationUpdate?: boolean
+            subdivide?: boolean
+        },
     ): Observable<Fence> {
-        let params = new HttpParams();
+        let params = new HttpParams()
         if (options?.forceLocationUpdate !== undefined) {
-            params = params.set('force_location_update', options.forceLocationUpdate.toString());
+            params = params.set('force_location_update', options.forceLocationUpdate.toString())
         }
         if (options?.subdivide !== undefined) {
-            params = params.set('subdivide', options.subdivide.toString());
+            params = params.set('subdivide', options.subdivide.toString())
         }
 
-        return this.post<Fence>('/fences', fence);
+        return this.post<Fence>('/fences', fence)
     }
 
     /**
@@ -54,19 +54,19 @@ export class OmloxFencesService extends OmloxBaseService {
         fenceId: string,
         fence: Fence,
         options?: {
-            forceLocationUpdate?: boolean;
-            subdivide?: boolean;
-        }
+            forceLocationUpdate?: boolean
+            subdivide?: boolean
+        },
     ): Observable<Fence> {
-        let params = new HttpParams();
+        let params = new HttpParams()
         if (options?.forceLocationUpdate !== undefined) {
-            params = params.set('force_location_update', options.forceLocationUpdate.toString());
+            params = params.set('force_location_update', options.forceLocationUpdate.toString())
         }
         if (options?.subdivide !== undefined) {
-            params = params.set('subdivide', options.subdivide.toString());
+            params = params.set('subdivide', options.subdivide.toString())
         }
 
-        return this.put<Fence>(`/fences/${fenceId}`, fence);
+        return this.put<Fence>(`/fences/${fenceId}`, fence)
     }
 
     /**
@@ -74,7 +74,7 @@ export class OmloxFencesService extends OmloxBaseService {
      * Deletes the fence object with the given id.
      */
     deleteFence(fenceId: string): Observable<void> {
-        return this.delete<void>(`/fences/${fenceId}`);
+        return this.delete<void>(`/fences/${fenceId}`)
     }
 
     /**
@@ -82,7 +82,7 @@ export class OmloxFencesService extends OmloxBaseService {
      * This function deletes all fences known to the system.
      */
     deleteAllFences(): Observable<void> {
-        return this.delete<void>('/fences');
+        return this.delete<void>('/fences')
     }
 
     /**
@@ -92,27 +92,27 @@ export class OmloxFencesService extends OmloxBaseService {
     getFenceEvents(
         fenceId: string,
         options?: {
-            maxAge?: number;
-            limit?: number;
-            offset?: number;
-            trackableId?: string;
-        }
+            maxAge?: number
+            limit?: number
+            offset?: number
+            trackableId?: string
+        },
     ): Observable<FenceEvent[]> {
-        let params = new HttpParams();
+        let params = new HttpParams()
         if (options?.maxAge !== undefined) {
-            params = params.set('max_age', options.maxAge.toString());
+            params = params.set('max_age', options.maxAge.toString())
         }
         if (options?.limit !== undefined) {
-            params = params.set('limit', options.limit.toString());
+            params = params.set('limit', options.limit.toString())
         }
         if (options?.offset !== undefined) {
-            params = params.set('offset', options.offset.toString());
+            params = params.set('offset', options.offset.toString())
         }
         if (options?.trackableId) {
-            params = params.set('trackable_id', options.trackableId);
+            params = params.set('trackable_id', options.trackableId)
         }
 
-        return this.get<FenceEvent[]>(`/fences/${fenceId}/events`, params);
+        return this.get<FenceEvent[]>(`/fences/${fenceId}/events`, params)
     }
 
     /**
@@ -121,17 +121,14 @@ export class OmloxFencesService extends OmloxBaseService {
      */
     getInsideTrackablesForFence(
         fenceId: string,
-        spatialQuery?: boolean
+        spatialQuery?: boolean,
     ): Observable<import('../models/trackable').Trackable[]> {
-        let params = new HttpParams();
+        let params = new HttpParams()
         if (spatialQuery !== undefined) {
-            params = params.set('spatial_query', spatialQuery.toString());
+            params = params.set('spatial_query', spatialQuery.toString())
         }
 
-        return this.get<import('../models/trackable').Trackable[]>(
-            `/fences/${fenceId}/trackables`,
-            params
-        );
+        return this.get<import('../models/trackable').Trackable[]>(`/fences/${fenceId}/trackables`, params)
     }
 
     /**
@@ -139,26 +136,26 @@ export class OmloxFencesService extends OmloxBaseService {
      * Returns collision data for trackable objects.
      */
     getAllCollisions(options?: {
-        maxAge?: number;
-        limit?: number;
-        offset?: number;
-        trackableId?: string;
+        maxAge?: number
+        limit?: number
+        offset?: number
+        trackableId?: string
     }): Observable<Collision[]> {
-        let params = new HttpParams();
+        let params = new HttpParams()
         if (options?.maxAge !== undefined) {
-            params = params.set('max_age', options.maxAge.toString());
+            params = params.set('max_age', options.maxAge.toString())
         }
         if (options?.limit !== undefined) {
-            params = params.set('limit', options.limit.toString());
+            params = params.set('limit', options.limit.toString())
         }
         if (options?.offset !== undefined) {
-            params = params.set('offset', options.offset.toString());
+            params = params.set('offset', options.offset.toString())
         }
         if (options?.trackableId) {
-            params = params.set('trackable_id', options.trackableId);
+            params = params.set('trackable_id', options.trackableId)
         }
 
-        return this.get<Collision[]>('/collisions', params);
+        return this.get<Collision[]>('/collisions', params)
     }
 
     /**
@@ -166,25 +163,25 @@ export class OmloxFencesService extends OmloxBaseService {
      * Returns collision events including start, ongoing, and end events between trackables.
      */
     getAllCollisionEvents(options?: {
-        maxAge?: number;
-        limit?: number;
-        offset?: number;
-        trackableId?: string;
+        maxAge?: number
+        limit?: number
+        offset?: number
+        trackableId?: string
     }): Observable<CollisionEvent[]> {
-        let params = new HttpParams();
+        let params = new HttpParams()
         if (options?.maxAge !== undefined) {
-            params = params.set('max_age', options.maxAge.toString());
+            params = params.set('max_age', options.maxAge.toString())
         }
         if (options?.limit !== undefined) {
-            params = params.set('limit', options.limit.toString());
+            params = params.set('limit', options.limit.toString())
         }
         if (options?.offset !== undefined) {
-            params = params.set('offset', options.offset.toString());
+            params = params.set('offset', options.offset.toString())
         }
         if (options?.trackableId) {
-            params = params.set('trackable_id', options.trackableId);
+            params = params.set('trackable_id', options.trackableId)
         }
 
-        return this.get<CollisionEvent[]>('/collision-events', params);
+        return this.get<CollisionEvent[]>('/collision-events', params)
     }
 }

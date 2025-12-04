@@ -4,9 +4,9 @@
  */
 export interface Point {
     /** GeoJSON geometry type identifier */
-    type: 'Point';
+    type: 'Point'
     /** Coordinate array: [longitude, latitude] or [longitude, latitude, altitude] */
-    coordinates: [number, number] | [number, number, number];
+    coordinates: [number, number] | [number, number, number]
 }
 
 /**
@@ -15,9 +15,9 @@ export interface Point {
  */
 export interface Polygon {
     /** GeoJSON geometry type identifier */
-    type: 'Polygon';
+    type: 'Polygon'
     /** Array of linear ring coordinate arrays defining the polygon */
-    coordinates: number[][][];
+    coordinates: number[][][]
 }
 
 /**
@@ -26,16 +26,16 @@ export interface Polygon {
  */
 export interface LineString {
     /** GeoJSON geometry type identifier */
-    type: 'LineString';
+    type: 'LineString'
     /** Array of coordinate arrays defining the line */
-    coordinates: number[][];
+    coordinates: number[][]
 }
 
 /**
  * Union type for all supported GeoJSON geometry types.
  * Represents any geometric shape that can be used in the OMLOX system.
  */
-export type Geometry = Point | Polygon | LineString;
+export type Geometry = Point | Polygon | LineString
 
 /**
  * Locating rule schema from the OMLOX Hub API specification.
@@ -43,9 +43,9 @@ export type Geometry = Point | Polygon | LineString;
  */
 export interface RuleSetInner {
     /** The conditions of the LocatingRule. Supported properties are: accuracy, provider_id, type, source, floor, speed, timestamp_diff. */
-    expression?: string;
+    expression?: string
     /** The priority of the LocatingRule. The higher the value the higher the priority of the rule. */
-    priority?: number;
+    priority?: number
 }
 
 /**
@@ -54,9 +54,9 @@ export interface RuleSetInner {
  */
 export interface ModelError {
     /** Numeric error code for programmatic error handling */
-    code?: number;
+    code?: number
     /** Human-readable error description */
-    message?: string;
+    message?: string
 }
 
 /**
@@ -65,15 +65,15 @@ export interface ModelError {
  */
 export interface Proximity {
     /** X coordinate offset in meters */
-    x?: number;
+    x?: number
     /** Y coordinate offset in meters */
-    y?: number;
+    y?: number
     /** Z coordinate offset in meters */
-    z?: number;
+    z?: number
     /** Detection radius in meters */
-    radius?: number;
+    radius?: number
     /** Accuracy tolerance in meters */
-    accuracy?: number;
+    accuracy?: number
 }
 
 /**
@@ -82,15 +82,15 @@ export interface Proximity {
  */
 export interface SimpleTransform {
     /** Translation along X-axis in meters */
-    x?: number;
+    x?: number
     /** Translation along Y-axis in meters */
-    y?: number;
+    y?: number
     /** Translation along Z-axis in meters */
-    z?: number;
+    z?: number
     /** Rotation around Z-axis in degrees (heading/bearing) */
-    yaw?: number;
+    yaw?: number
     /** Rotation around Y-axis in degrees (elevation angle) */
-    pitch?: number;
+    pitch?: number
     /** Rotation around X-axis in degrees (bank/tilt angle) */
-    roll?: number;
+    roll?: number
 }

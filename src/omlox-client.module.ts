@@ -1,23 +1,23 @@
-import { NgModule, ModuleWithProviders } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';
-import { OmloxClientConfig, OMLOX_CLIENT_CONFIG } from './config';
-import { OmloxBaseService } from './base.service';
+import { NgModule, ModuleWithProviders } from '@angular/core'
+import { HttpClientModule } from '@angular/common/http'
+import { OmloxClientConfig, OMLOX_CLIENT_CONFIG } from './config'
+import { OmloxBaseService } from './base.service'
 import {
     OmloxTrackablesService,
     OmloxFencesService,
     OmloxZonesService,
     OmloxProvidersService,
-} from './services';
+} from './services'
 
 /**
  * @deprecated Use `provideOmloxClient()` function instead for standalone Angular applications.
  * This module is provided for backward compatibility only.
- * 
+ *
  * Migration example:
  * ```typescript
  * // Old module-based approach:
  * imports: [OmloxClientModule.forRoot(config)]
- * 
+ *
  * // New standalone approach:
  * providers: [provideOmloxClient(config)]
  * ```
@@ -48,6 +48,6 @@ export class OmloxClientModule {
                 OmloxZonesService,
                 OmloxProvidersService,
             ],
-        };
+        }
     }
 }

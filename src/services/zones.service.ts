@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { OmloxBaseService } from '../base.service';
-import { Zone } from '../models';
+import { Injectable } from '@angular/core'
+import { HttpParams } from '@angular/common/http'
+import { Observable } from 'rxjs'
+import { OmloxBaseService } from '../base.service'
+import { Zone } from '../models'
 
 @Injectable({
     providedIn: 'root',
@@ -13,7 +13,7 @@ export class OmloxZonesService extends OmloxBaseService {
      * Returns an array of all zone objects. If authorization is enabled only the corresponding zones are returned.
      */
     getAllZones(): Observable<Zone[]> {
-        return this.get<Zone[]>('/zones/summary');
+        return this.get<Zone[]>('/zones/summary')
     }
 
     /**
@@ -21,7 +21,7 @@ export class OmloxZonesService extends OmloxBaseService {
      * Returns the zone object with the given id.
      */
     getZone(zoneId: string): Observable<Zone> {
-        return this.get<Zone>(`/zones/${zoneId}`);
+        return this.get<Zone>(`/zones/${zoneId}`)
     }
 
     /**
@@ -31,15 +31,15 @@ export class OmloxZonesService extends OmloxBaseService {
     createZone(
         zone: Zone,
         options?: {
-            subdivide?: boolean;
-        }
+            subdivide?: boolean
+        },
     ): Observable<Zone> {
-        let params = new HttpParams();
+        let params = new HttpParams()
         if (options?.subdivide !== undefined) {
-            params = params.set('subdivide', options.subdivide.toString());
+            params = params.set('subdivide', options.subdivide.toString())
         }
 
-        return this.post<Zone>('/zones', zone);
+        return this.post<Zone>('/zones', zone)
     }
 
     /**
@@ -50,15 +50,15 @@ export class OmloxZonesService extends OmloxBaseService {
         zoneId: string,
         zone: Zone,
         options?: {
-            subdivide?: boolean;
-        }
+            subdivide?: boolean
+        },
     ): Observable<Zone> {
-        let params = new HttpParams();
+        let params = new HttpParams()
         if (options?.subdivide !== undefined) {
-            params = params.set('subdivide', options.subdivide.toString());
+            params = params.set('subdivide', options.subdivide.toString())
         }
 
-        return this.put<Zone>(`/zones/${zoneId}`, zone);
+        return this.put<Zone>(`/zones/${zoneId}`, zone)
     }
 
     /**
@@ -66,7 +66,7 @@ export class OmloxZonesService extends OmloxBaseService {
      * Deletes the zone object with the given id.
      */
     deleteZone(zoneId: string): Observable<void> {
-        return this.delete<void>(`/zones/${zoneId}`);
+        return this.delete<void>(`/zones/${zoneId}`)
     }
 
     /**
@@ -74,7 +74,7 @@ export class OmloxZonesService extends OmloxBaseService {
      * This function deletes all zones known to the system.
      */
     deleteAllZones(): Observable<void> {
-        return this.delete<void>('/zones');
+        return this.delete<void>('/zones')
     }
 
     /**
@@ -83,16 +83,13 @@ export class OmloxZonesService extends OmloxBaseService {
      */
     getInsideTrackablesForZone(
         zoneId: string,
-        spatialQuery?: boolean
+        spatialQuery?: boolean,
     ): Observable<import('../models/trackable').Trackable[]> {
-        let params = new HttpParams();
+        let params = new HttpParams()
         if (spatialQuery !== undefined) {
-            params = params.set('spatial_query', spatialQuery.toString());
+            params = params.set('spatial_query', spatialQuery.toString())
         }
 
-        return this.get<import('../models/trackable').Trackable[]>(
-            `/zones/${zoneId}/trackables`,
-            params
-        );
+        return this.get<import('../models/trackable').Trackable[]>(`/zones/${zoneId}/trackables`, params)
     }
 }

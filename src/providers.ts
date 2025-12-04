@@ -1,21 +1,21 @@
-import { EnvironmentProviders, makeEnvironmentProviders } from '@angular/core';
-import { provideHttpClient } from '@angular/common/http';
-import { OmloxClientConfig, OMLOX_CLIENT_CONFIG } from './config';
-import { OmloxBaseService } from './base.service';
+import { EnvironmentProviders, makeEnvironmentProviders } from '@angular/core'
+import { provideHttpClient } from '@angular/common/http'
+import { OmloxClientConfig, OMLOX_CLIENT_CONFIG } from './config'
+import { OmloxBaseService } from './base.service'
 import {
     OmloxTrackablesService,
     OmloxFencesService,
     OmloxZonesService,
     OmloxProvidersService,
-} from './services';
+} from './services'
 
 /**
  * Provides OMLOX client services for standalone Angular applications.
  * Use this function in your bootstrap providers or route providers to configure the OMLOX client.
- * 
+ *
  * @param config Configuration object containing baseUrl and optional default headers
  * @returns Environment providers for the OMLOX client services
- * 
+ *
  * @example
  * ```typescript
  * // In main.ts
@@ -38,16 +38,16 @@ export function provideOmloxClient(config: OmloxClientConfig): EnvironmentProvid
         OmloxFencesService,
         OmloxZonesService,
         OmloxProvidersService,
-    ]);
+    ])
 }
 
 /**
  * Provides OMLOX client services without configuration.
  * Use this when you want to provide the services but configure them later,
  * or when configuration is provided through other means.
- * 
+ *
  * @returns Environment providers for the OMLOX client services
- * 
+ *
  * @example
  * ```typescript
  * // In a feature route
@@ -68,5 +68,5 @@ export function provideOmloxServices(): EnvironmentProviders {
         OmloxFencesService,
         OmloxZonesService,
         OmloxProvidersService,
-    ]);
+    ])
 }

@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { OmloxBaseService } from '../base.service';
-import { Trackable, TrackableMotion, Location, LocationProvider } from '../models';
+import { Injectable } from '@angular/core'
+import { HttpParams } from '@angular/common/http'
+import { Observable } from 'rxjs'
+import { OmloxBaseService } from '../base.service'
+import { Trackable, TrackableMotion, Location, LocationProvider } from '../models'
 
 @Injectable({
     providedIn: 'root',
@@ -13,7 +13,7 @@ export class OmloxTrackablesService extends OmloxBaseService {
      * Returns an array of all trackable objects. If authorization is enabled only the corresponding trackables are returned.
      */
     getAllTrackables(): Observable<Trackable[]> {
-        return this.get<Trackable[]>('/trackables/summary');
+        return this.get<Trackable[]>('/trackables/summary')
     }
 
     /**
@@ -21,7 +21,7 @@ export class OmloxTrackablesService extends OmloxBaseService {
      * Returns the trackable object with the given id.
      */
     getTrackable(trackableId: string): Observable<Trackable> {
-        return this.get<Trackable>(`/trackables/${trackableId}`);
+        return this.get<Trackable>(`/trackables/${trackableId}`)
     }
 
     /**
@@ -31,19 +31,19 @@ export class OmloxTrackablesService extends OmloxBaseService {
     createTrackable(
         trackable: Trackable,
         options?: {
-            forceLocationUpdate?: boolean;
-            subdivide?: boolean;
-        }
+            forceLocationUpdate?: boolean
+            subdivide?: boolean
+        },
     ): Observable<Trackable> {
-        let params = new HttpParams();
+        let params = new HttpParams()
         if (options?.forceLocationUpdate !== undefined) {
-            params = params.set('force_location_update', options.forceLocationUpdate.toString());
+            params = params.set('force_location_update', options.forceLocationUpdate.toString())
         }
         if (options?.subdivide !== undefined) {
-            params = params.set('subdivide', options.subdivide.toString());
+            params = params.set('subdivide', options.subdivide.toString())
         }
 
-        return this.post<Trackable>('/trackables', trackable);
+        return this.post<Trackable>('/trackables', trackable)
     }
 
     /**
@@ -54,19 +54,19 @@ export class OmloxTrackablesService extends OmloxBaseService {
         trackableId: string,
         trackable: Trackable,
         options?: {
-            forceLocationUpdate?: boolean;
-            subdivide?: boolean;
-        }
+            forceLocationUpdate?: boolean
+            subdivide?: boolean
+        },
     ): Observable<Trackable> {
-        let params = new HttpParams();
+        let params = new HttpParams()
         if (options?.forceLocationUpdate !== undefined) {
-            params = params.set('force_location_update', options.forceLocationUpdate.toString());
+            params = params.set('force_location_update', options.forceLocationUpdate.toString())
         }
         if (options?.subdivide !== undefined) {
-            params = params.set('subdivide', options.subdivide.toString());
+            params = params.set('subdivide', options.subdivide.toString())
         }
 
-        return this.put<Trackable>(`/trackables/${trackableId}`, trackable);
+        return this.put<Trackable>(`/trackables/${trackableId}`, trackable)
     }
 
     /**
@@ -74,7 +74,7 @@ export class OmloxTrackablesService extends OmloxBaseService {
      * Deletes the trackable object with the given id.
      */
     deleteTrackable(trackableId: string): Observable<void> {
-        return this.delete<void>(`/trackables/${trackableId}`);
+        return this.delete<void>(`/trackables/${trackableId}`)
     }
 
     /**
@@ -82,7 +82,7 @@ export class OmloxTrackablesService extends OmloxBaseService {
      * This function deletes all trackables known to the system.
      */
     deleteAllTrackables(): Observable<void> {
-        return this.delete<void>('/trackables');
+        return this.delete<void>('/trackables')
     }
 
     /**
@@ -90,7 +90,7 @@ export class OmloxTrackablesService extends OmloxBaseService {
      * Returns the motion object for the trackable with the given id.
      */
     getTrackableMotion(trackableId: string): Observable<TrackableMotion> {
-        return this.get<TrackableMotion>(`/trackables/${trackableId}/motion`);
+        return this.get<TrackableMotion>(`/trackables/${trackableId}/motion`)
     }
 
     /**
@@ -100,23 +100,23 @@ export class OmloxTrackablesService extends OmloxBaseService {
     getAllTrackableLocations(
         trackableId: string,
         options?: {
-            maxAge?: number;
-            limit?: number;
-            offset?: number;
-        }
+            maxAge?: number
+            limit?: number
+            offset?: number
+        },
     ): Observable<Location[]> {
-        let params = new HttpParams();
+        let params = new HttpParams()
         if (options?.maxAge !== undefined) {
-            params = params.set('max_age', options.maxAge.toString());
+            params = params.set('max_age', options.maxAge.toString())
         }
         if (options?.limit !== undefined) {
-            params = params.set('limit', options.limit.toString());
+            params = params.set('limit', options.limit.toString())
         }
         if (options?.offset !== undefined) {
-            params = params.set('offset', options.offset.toString());
+            params = params.set('offset', options.offset.toString())
         }
 
-        return this.get<Location[]>(`/trackables/${trackableId}/locations`, params);
+        return this.get<Location[]>(`/trackables/${trackableId}/locations`, params)
     }
 
     /**
@@ -124,7 +124,7 @@ export class OmloxTrackablesService extends OmloxBaseService {
      * This method updates the current location of the location provider with the given id.
      */
     createTrackableLocation(trackableId: string, location: Location): Observable<Location> {
-        return this.post<Location>(`/trackables/${trackableId}/locations`, location);
+        return this.post<Location>(`/trackables/${trackableId}/locations`, location)
     }
 
     /**
@@ -132,7 +132,7 @@ export class OmloxTrackablesService extends OmloxBaseService {
      * Retrieve a list of location provider IDs associated with a specific trackable.
      */
     getTrackableLocationProviders(trackableId: string): Observable<LocationProvider[]> {
-        return this.get<LocationProvider[]>(`/trackables/${trackableId}/location_providers`);
+        return this.get<LocationProvider[]>(`/trackables/${trackableId}/location_providers`)
     }
 
     /**
@@ -140,10 +140,7 @@ export class OmloxTrackablesService extends OmloxBaseService {
      * Associates a location provider with a specific trackable.
      */
     assignLocationProvider(trackableId: string, locationProviderId: string): Observable<void> {
-        return this.put<void>(
-            `/trackables/${trackableId}/location_providers/${locationProviderId}`,
-            {}
-        );
+        return this.put<void>(`/trackables/${trackableId}/location_providers/${locationProviderId}`, {})
     }
 
     /**
@@ -151,9 +148,7 @@ export class OmloxTrackablesService extends OmloxBaseService {
      * Removes the association between a location provider and a specific trackable.
      */
     unassignLocationProvider(trackableId: string, locationProviderId: string): Observable<void> {
-        return this.delete<void>(
-            `/trackables/${trackableId}/location_providers/${locationProviderId}`
-        );
+        return this.delete<void>(`/trackables/${trackableId}/location_providers/${locationProviderId}`)
     }
 
     /**
@@ -162,17 +157,14 @@ export class OmloxTrackablesService extends OmloxBaseService {
      */
     getInsideFenceForTrackable(
         trackableId: string,
-        spatialQuery?: boolean
+        spatialQuery?: boolean,
     ): Observable<import('../models/fence').Fence[]> {
-        let params = new HttpParams();
+        let params = new HttpParams()
         if (spatialQuery !== undefined) {
-            params = params.set('spatial_query', spatialQuery.toString());
+            params = params.set('spatial_query', spatialQuery.toString())
         }
 
-        return this.get<import('../models/fence').Fence[]>(
-            `/trackables/${trackableId}/fences`,
-            params
-        );
+        return this.get<import('../models/fence').Fence[]>(`/trackables/${trackableId}/fences`, params)
     }
 
     /**
@@ -180,6 +172,6 @@ export class OmloxTrackablesService extends OmloxBaseService {
      * Returns sensor data associated with the specified trackable.
      */
     getAllTrackableSensors(trackableId: string): Observable<any[]> {
-        return this.get<any[]>(`/trackables/${trackableId}/sensors`);
+        return this.get<any[]>(`/trackables/${trackableId}/sensors`)
     }
 }
