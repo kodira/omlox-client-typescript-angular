@@ -1,16 +1,13 @@
 # Omlox Angular Client
 
-A custom TypeScript Angular client for the omlox Hub API with proper Bearer authentication support.
+A TypeScript Angular client for the omlox Hub API with Bearer authentication support.
 
 ## Features
 
 - Native Angular services using HttpClient
-- Proper Bearer token authentication
+- Bearer token authentication
 - Full TypeScript support with typed models
 - Observable-based API
-- Comprehensive error handling
-- Modular architecture
-- Ready for NPM publishing
 
 ## Installation
 
@@ -98,3 +95,4 @@ All omlox data models are fully typed:
 ```typescript
 import { Trackable, Fence, Zone, Location, TrackableMotion } from '@kodira/omlox-client-typescript-angular'
 ```
+
