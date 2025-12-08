@@ -2,6 +2,10 @@
     "name": "@kodira/omlox-client-typescript-angular",
     "version": "0.1.0",
     "description": "TypeScript Angular client for the OMLOX Hub API 2.0",
+    "publishConfig": {
+        "access": "public",
+        "registry": "https://registry.npmjs.org/"
+    },
     "main": "index.js",
     "types": "index.d.ts",
     "keywords": [
@@ -29,7 +33,7 @@
     "sideEffects": false,
     "scripts": {
         "build": "ng build",
-        "publish": "rm -r dist/* && npm run build && cd dist && npm publish",
+        "publish": "rm -r dist/* && npm run build && cd dist && npm publish --registry https://registry.npmjs.org/",
         "link": "rm -r dist/* && npm run build && cd dist && npm link",
         "format": "prettier -w ."
     },

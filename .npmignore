@@ -1,0 +1,23 @@
+# Build and development files
+.direnv/
+.envrc
+flake.nix
+flake.lock
+
+# Editor config
+.editorconfig
+.prettierignore
+.prettierrc.json
+
+# Angular build config
+angular.json
+tsconfig.*.json
+
+# Source files (dist/ will contain built files)
+src/
+
+# Development
+node_modules/
+*.log
+.git/
+.gitignore
