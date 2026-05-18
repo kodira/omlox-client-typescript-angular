@@ -63,5 +63,5 @@ jobs:
 
       - name: Publish to npm
         if: steps.check_version.outputs.should_publish == 'true'
-        working-directory: ./dist
-        run: nix develop --command npm publish --verbose
+        run: nix develop --command npm run publish
+
