@@ -1,6 +1,6 @@
 {
     "name": "@kodira/omlox-client-typescript-angular",
-    "version": "0.1.1",
+    "version": "0.1.2",
     "description": "TypeScript Angular client for the OMLOX Hub API 2.0",
     "publishConfig": {
         "access": "public",
