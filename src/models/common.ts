@@ -60,20 +60,24 @@ export interface ModelError {
 }
 
 /**
- * Proximity-based configuration for location services.
- * Defines spatial parameters for proximity detection and accuracy.
+ * Proximity event data schema from the OMLOX Hub API specification.
+ * Represents proximity-based location updates from systems like RFID or iBeacon.
  */
 export interface Proximity {
-    /** X coordinate offset in meters */
-    x?: number
-    /** Y coordinate offset in meters */
-    y?: number
-    /** Z coordinate offset in meters */
-    z?: number
-    /** Detection radius in meters */
-    radius?: number
-    /** Accuracy tolerance in meters */
+    /** Represents the unique identifier of the proximity system (ie. zone_id or foreign_id) that generated the proximity object. For example, this could be the RFID station id or iBeacon UUID. */
+    source: string
+    /** The location provider type that triggered the proximity update. */
+    provider_type: 'rfid' | 'ibeacon' | 'virtual' | 'unknown'
+    /** The location provider unique identifier, e.g. the UID or TID of a RFID tag. */
+    provider_id: string
+    /** The timestamp when the location was calculated. The timestamp MUST be an ISO 8601 timestamp using UTC timezone and it SHOULD have millisecond precision to allow for precise speed and course calculations. */
+    timestamp_generated?: string
+    /** The timestamp when the location was sent over the network. The timestamp MUST be an ISO 8601 timestamp using UTC timezone and it SHOULD have millisecond precision. Note: No delivery guarantee is made in case the data is lost in transit. */
+    timestamp_sent?: string
+    /** The estimated distance in meters to the center of the proximity event emitter (e.g. the distance to the iBeacon). */
     accuracy?: number
+    /** Any additional application or vendor specific properties. An application implementing this object is not required to interpret any of the custom properties, but it MUST preserve the properties if set. */
+    properties?: Record<string, any>
 }
 
 /**
