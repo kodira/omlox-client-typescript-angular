@@ -86,17 +86,29 @@ export class OmloxBaseService {
     ): Observable<T> {
         const url = `${this.baseUrl}${path}`
         const authHeaders = this.getAuthHeaders()
-        const finalHeaders = options?.headers
+
+        // Determine the final HttpHeaders instance
+        const finalHeadersInstance = options?.headers
             ? options.headers.set('Authorization', authHeaders.get('Authorization') || '')
             : authHeaders
 
+        // Convert the HttpHeaders instance into a plain JavaScript object needed for compatibility with Capacitors native HTTP client
+        const plainHeaders: Record<string, string> = {}
+        finalHeadersInstance.keys().forEach((key) => {
+            const value = finalHeadersInstance.get(key)
+            if (value !== null) {
+                plainHeaders[key] = value
+            }
+        })
+
+        // Pass the plain object to the request options
         const httpOptions = {
-            headers: finalHeaders,
+            headers: plainHeaders,
             params: options?.params,
             body: options?.body,
         }
 
-        console.log(`Client: Doing ${method} to ${url} with headers:`, finalHeaders)
+        console.log(`Client: Doing ${method} to ${url} with headers:`, plainHeaders)
 
         return this.http.request<T>(method, url, httpOptions).pipe(catchError(this.handleError.bind(this)))
     }
