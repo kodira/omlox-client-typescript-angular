@@ -120,13 +120,6 @@ export class OmloxBaseService {
             body: plainBody,
         }
 
-        console.log(
-            `Client: Doing ${method} to ${url} with headers, parameters and body:`,
-            plainHeaders,
-            plainParams,
-            plainBody,
-        )
-
         return this.http.request<T>(method, url, httpOptions).pipe(catchError(this.handleError.bind(this)))
     }
 
