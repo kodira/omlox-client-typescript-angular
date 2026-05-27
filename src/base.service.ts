@@ -101,14 +101,31 @@ export class OmloxBaseService {
             }
         })
 
+        // Convert the HttpParams instance into a plain JavaScript object needed for compatibility with Capacitors native HTTP client
+        let plainParams: Record<string, string> | undefined = undefined
+        if (options?.params) {
+            plainParams = {}
+            options.params.keys().forEach((key) => {
+                plainParams![key] = options.params!.get(key) || ''
+            })
+        }
+
+        // Just to be safe we also convert the body instance into a plain JavaScript. Probably not needed...
+        let plainBody = options?.body ? JSON.parse(JSON.stringify(options.body)) : undefined
+
         // Pass the plain object to the request options
         const httpOptions = {
             headers: plainHeaders,
-            params: options?.params,
-            body: options?.body,
+            params: plainParams,
+            body: plainBody,
         }
 
-        console.log(`Client: Doing ${method} to ${url} with headers:`, plainHeaders)
+        console.log(
+            `Client: Doing ${method} to ${url} with headers, parameters and body:`,
+            plainHeaders,
+            plainParams,
+            plainBody,
+        )
 
         return this.http.request<T>(method, url, httpOptions).pipe(catchError(this.handleError.bind(this)))
     }
