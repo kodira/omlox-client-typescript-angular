@@ -96,6 +96,8 @@ export class OmloxBaseService {
             body: options?.body,
         }
 
+        console.log(`Client: Doing ${method} to ${url} with headers:`, finalHeaders)
+
         return this.http.request<T>(method, url, httpOptions).pipe(catchError(this.handleError.bind(this)))
     }
 
